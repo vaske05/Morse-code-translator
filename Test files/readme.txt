@@ -1,4 +1,4 @@
-This folder contains public data set for 'Morse code' homework task.
+This folder contains data set for 'Morse code translator'. 
 
 Content:
 *.in - text files that contain input signals
