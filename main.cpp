@@ -120,7 +120,7 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 
-	if (numberOfSamples(path)) //Ako je zadovoljavajuci velicine fajla(max 10 000 redova)
+	if (numberOfSamples(path)) 
 	{
 
 		int temp = lenOfFirstChar(path); //Duzina prvog znaka
