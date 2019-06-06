@@ -240,7 +240,7 @@ int main()
 	cout << endl << "Input text: " << convertToEnglish(morseCodeString, morse) << endl << endl;
 
 
-	//Simulate signal
+	//Simulate audio morse signal :)
 	string answer;
 	cout << "Simulate magic?" << endl;
 
