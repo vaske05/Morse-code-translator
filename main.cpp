@@ -9,7 +9,7 @@
 #include <stdlib.h>
 using namespace std;
 
-
+//Checking number of samples
 bool numberOfSamples(string path)
 {
 	ifstream file(path);
@@ -59,14 +59,14 @@ int lenOfFirstChar(string path)
 	}
 }
 
-//Morse to English
-string convertToEnglish(std::string morse, std::string const morseCode[])
+//Function that converts Morse code to English
+string convertToEnglish(string morse, string const morseCode[])
 {
-	std::string output = "";
-	std::string currentLetter = "";
-	std::istringstream ss(morse);
+	string output = "";
+	string currentLetter = "";
+	istringstream ss(morse);
 
-	std::size_t const characters = 27;
+	size_t const characters = 27;
 
 	while (ss >> currentLetter)
 	{
@@ -76,7 +76,7 @@ string convertToEnglish(std::string morse, std::string const morseCode[])
 			ss >> currentLetter;
 		}
 
-		std::size_t index = 0;
+		size_t index = 0;
 		try
 		{
 			while (currentLetter != morseCode[index] && index < characters)
@@ -85,7 +85,7 @@ string convertToEnglish(std::string morse, std::string const morseCode[])
 				++index;
 			}
 		}
-		catch (const std::exception& e)
+		catch (exception& e)
 		{
 			cout << "Exception: " << e.what() << endl;
 		}
@@ -97,21 +97,73 @@ string convertToEnglish(std::string morse, std::string const morseCode[])
 	return output;
 }
 
+void print(string morseCodeString, string const morse[], string morseCode[], int i)
+{
+	cout << endl << "Input Morse code: " << morseCodeString << endl;
+
+	cout << endl << "Input text: " << convertToEnglish(morseCodeString, morse) << endl << endl;
+
+
+	//Simulate audio morse signal :)
+	string answer;
+	cout << "Simulate magic?" << endl;
+
+	while (answer != "Y" || answer != "N")
+	{
+		cout << "Y or N" << endl;
+		cin >> answer;
+
+		if (answer == "Y")
+		{
+			for (int x = 0; x < i; x++)
+			{
+				if (morseCode[x] == ".")
+				{
+					Beep(500, 200);
+				}
+				else if (morseCode[x] == "-")
+				{
+					Beep(500, 700);
+				}
+				else if (morseCode[x] == " ")
+				{
+					Beep(0, 100);
+				}
+				else if (morseCode[x] == " / ")
+				{
+					Beep(0, 400);
+				}
+			}
+			cout << endl;
+			cout << "---------------------------------------------------";
+			cout << endl << "Developed by Milan Vasic." << endl;
+			cout << "---------------------------------------------------" << endl;
+			exit(EXIT_SUCCESS);
+		}
+		else if (answer == "N") {
+			cout << endl;
+			cout << "---------------------------------------------------";
+			cout << endl << "Developed by Milan Vasic." << endl;
+			cout << "---------------------------------------------------" << endl;
+			exit(EXIT_SUCCESS);
+		}
+	}
+}
+
+
 
 int main()
 {
 	string path;
-	cout << "Enter path of file.(Example: C:/Users/Vaske/Desktop/Test/case-7.in ) " << endl;
-	cin >> path;
-	//string path = "C:/Users/Vaske/Desktop/Test/case-0.in";
+	//cout << "Enter path of file.(Example: C:/Users/Vaske/Desktop/Test/case-7.in ) " << endl;
+	//cin >> path;
+	path = "C:/tests/case-10.in";
 
 	ifstream file(path);
-	string line = "";
-	string morseCode[250];
-	string morseCodeString;
+	string line = "", morseCode[250], morseCodeString;
 	int lenOfDot, lenOfDash, lenOfWordsPause, lenOfLetterPause, lenOfSmallPause, i = 0;
 
-	std::string const morse[] = { ".-", "-...", "-.-.", "-..", ".", "..-.",
+	string const morse[] = { ".-", "-...", "-.-.", "-..", ".", "..-.",
 		"--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-",
 		".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."," / " };
 
@@ -235,53 +287,7 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 
-	cout << endl << "Input Morse code: " << morseCodeString << endl;
+	print(morseCodeString, morse, morseCode, i);
 
-	cout << endl << "Input text: " << convertToEnglish(morseCodeString, morse) << endl << endl;
-
-
-	//Simulate audio morse signal :)
-	string answer;
-	cout << "Simulate magic?" << endl;
-
-	while (answer != "Y" || answer != "N")
-	{
-		cout << "Y or N" << endl;
-		cin >> answer;
-
-		if (answer == "Y")
-		{
-			for (int x = 0; x < i; x++)
-			{
-				if (morseCode[x] == ".")
-				{
-					Beep(500, 200);
-				}
-				else if (morseCode[x] == "-")
-				{
-					Beep(500, 700);
-				}
-				else if (morseCode[x] == " ")
-				{
-					Beep(0, 100);
-				}
-				else if (morseCode[x] == " / ")
-				{
-					Beep(0, 400);
-				}
-			}
-			cout << endl;
-			cout << "---------------------------------------------------" ;
-			cout << endl << "Developed by Milan Vasic." << endl;
-			cout << "---------------------------------------------------" << endl;
-			exit(EXIT_SUCCESS);
-		}
-		else if (answer == "N") {
-			cout << endl;
-			cout << "---------------------------------------------------";
-			cout << endl << "Developed by Milan Vasic." << endl;
-			cout << "---------------------------------------------------" << endl;
-			exit(EXIT_SUCCESS);
-		}
-	}
+	
 }
