@@ -5,7 +5,7 @@ using namespace std;
 class Converter
 {
 private: 
-	//Array of morse code signs
+	//Array of morse code signs(one sign = one letter)
 	string const morse[40] = { ".-", "-...", "-.-.", "-..", ".", "..-.",
 		"--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-",
 		".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."," / " };
