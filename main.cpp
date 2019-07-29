@@ -7,6 +7,7 @@
 #include <sstream>
 #include <chrono>
 #include <stdlib.h>
+#include "Converter.h"
 using namespace std;
 
 //Checking number of samples
@@ -59,49 +60,15 @@ int lenOfFirstChar(string path)
 	}
 }
 
-//Function that converts Morse code to English
-string convertToEnglish(string morse, string const morseCode[])
+
+void print(string morseCodeString, string morseCode[], int i)
 {
-	string output = "";
-	string currentLetter = "";
-	istringstream ss(morse);
 
-	size_t const characters = 27;
+	Converter converter;
 
-	while (ss >> currentLetter)
-	{
-		if (currentLetter == "/")
-		{
-			output += " ";
-			ss >> currentLetter;
-		}
-
-		size_t index = 0;
-		try
-		{
-			while (currentLetter != morseCode[index] && index < characters)
-			{
-
-				++index;
-			}
-		}
-		catch (exception& e)
-		{
-			cout << "Exception: " << e.what() << endl;
-		}
-		
-
-		output += 'a' + index;
-	}
-
-	return output;
-}
-
-void print(string morseCodeString, string const morse[], string morseCode[], int i)
-{
 	cout << endl << "Input Morse code: " << morseCodeString << endl;
 
-	cout << endl << "Input text: " << convertToEnglish(morseCodeString, morse) << endl << endl;
+	cout << endl << "Input text: " << converter.convertToEnglish(morseCodeString) /*convertToEnglish(morseCodeString, morse) */ << endl << endl;
 
 
 	//Simulate audio morse signal :)
@@ -151,7 +118,6 @@ void print(string morseCodeString, string const morse[], string morseCode[], int
 }
 
 
-
 int main()
 {
 	string path;
@@ -163,9 +129,6 @@ int main()
 	string line = "", morseCode[250], morseCodeString;
 	int lenOfDot, lenOfDash, lenOfWordsPause, lenOfLetterPause, lenOfSmallPause, i = 0;
 
-	string const morse[] = { ".-", "-...", "-.-.", "-..", ".", "..-.",
-		"--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-",
-		".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."," / " };
 
 	if (!file.is_open()) {
 		cout << "Error! File not found." << endl;
@@ -179,37 +142,37 @@ int main()
 		if (temp < 22 && temp > 5)
 		{
 			lenOfDot = temp;
-			//cout << "Length of dot(.): " << lenOfDot <<"\n"; // .
+			cout << "Length of dot(.): " << lenOfDot <<"\n"; // .
 
 			lenOfDash = 3 * lenOfDot;
-			//cout << "Length of dash(-): " << lenOfDash << "\n"; // -
+			cout << "Length of dash(-): " << lenOfDash << "\n"; // -
 
 			lenOfWordsPause = 7 * lenOfDot;
-			//cout << "Length of words pause( / ): " << lenOfWordsPause << "\n"; // pause between words( / ) 3xSpace
+			cout << "Length of words pause( / ): " << lenOfWordsPause << "\n"; // pause between words( / ) 3xSpace
 
 			lenOfLetterPause = lenOfDash;
-			//cout << "Length of letter pause( ): " << lenOfLetterPause << "\n"; // pause between letter( )
+			cout << "Length of letter pause( ): " << lenOfLetterPause << "\n"; // pause between letter( )
 
 			lenOfSmallPause = lenOfDot;
-			//cout << "Length of small pause( ): " << lenOfSmallPause << "\n"; // small pause()
+			cout << "Length of small pause( ): " << lenOfSmallPause << "\n"; // small pause()
 
 		}
 		else if (temp % 3 == 0)
 		{
 			lenOfDash = temp;
-			//cout << "Length of dash(-):" << lenOfDash<<"\n"; // -
+			cout << "Length of dash(-):" << lenOfDash<<"\n"; // -
 
 			lenOfDot = lenOfDash / 3;
-			//cout << "Length of dot(.): " << lenOfDot << "\n"; // .
+			cout << "Length of dot(.): " << lenOfDot << "\n"; // .
 
 			lenOfWordsPause = 7 * lenOfDot;
-			//cout << "Length of words pause( / ): " << lenOfWordsPause << "\n"; // pause between words( / ) 3xSpace
+			cout << "Length of words pause( / ): " << lenOfWordsPause << "\n"; // pause between words( / ) 3xSpace
 
 			lenOfLetterPause = lenOfDash;
-			//cout << "Length of letter pause( ): " << lenOfLetterPause << "\n"; // pause between letter( )
+			cout << "Length of letter pause( ): " << lenOfLetterPause << "\n"; // pause between letter( )
 
 			lenOfSmallPause = lenOfDot;
-			//cout << "Length of small pause( ): " << lenOfSmallPause << "\n"; // small pause()
+			cout << "Length of small pause( ): " << lenOfSmallPause << "\n"; // small pause()
 		}
 
 		//Signal to Morse------------------------------------------------------------
@@ -287,7 +250,6 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 
-	print(morseCodeString, morse, morseCode, i);
+	print(morseCodeString, morseCode, i);
 
-	
 }
