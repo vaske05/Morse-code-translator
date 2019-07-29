@@ -63,12 +63,9 @@ int lenOfFirstChar(string path)
 
 void print(string morseCodeString, string morseCode[], int i)
 {
-
 	Converter converter;
-
 	cout << endl << "Input Morse code: " << morseCodeString << endl;
-
-	cout << endl << "Input text: " << converter.convertToEnglish(morseCodeString) /*convertToEnglish(morseCodeString, morse) */ << endl << endl;
+	cout << endl << "Input text: " << converter.convertToEnglish(morseCodeString)<< endl << endl;
 
 
 	//Simulate audio morse signal :)
