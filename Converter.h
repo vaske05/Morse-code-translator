@@ -5,13 +5,21 @@ using namespace std;
 class Converter
 {
 private: 
+
+	//Signal parameters
+	int lenOfDot, lenOfDash, lenOfWordsPause, lenOfLetterPause, lenOfSmallPause, i = 0;
+
+
 	//Array of morse code signs
 	string const morse[40] = { ".-", "-...", "-.-.", "-..", ".", "..-.",
 		"--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-",
 		".-.", "...", "-", "..-", "...-", ".--", "-..-", "-.--", "--.."," / " };
 
+
+
 public:
 	Converter();
-	string convertToEnglish(string morseCodeString);
+	string morseToEnglish(string morseCodeString);
+
 };
 
