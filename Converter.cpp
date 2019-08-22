@@ -9,12 +9,11 @@ Converter::Converter()
 }
 
 //Function that converts Morse code to English
-string Converter::convertToEnglish(string morseCodeString)
+string Converter::morseToEnglish(string morseCodeString)
 {
 	string output = "";
 	string currentLetter = "";
 	istringstream ss(morseCodeString);
-
 	size_t const characters = 27;
 
 	while (ss >> currentLetter)

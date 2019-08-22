@@ -11,7 +11,7 @@
 using namespace std;
 
 //Checking number of samples
-bool numberOfSamples(string path)
+bool checkSamplesNumber(string path)
 {
 	ifstream file(path);
 	string line = "";
@@ -65,7 +65,7 @@ void print(string morseCodeString, string morseCode[], int i)
 {
 	Converter converter;
 	cout << endl << "Input Morse code: " << morseCodeString << endl;
-	cout << endl << "Input text: " << converter.convertToEnglish(morseCodeString)<< endl << endl;
+	cout << endl << "Input text: " << converter.morseToEnglish(morseCodeString) << endl << endl;
 
 
 	//Simulate audio morse signal :)
@@ -132,7 +132,7 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 
-	if (numberOfSamples(path)) 
+	if (checkSamplesNumber(path))
 	{
 
 		int temp = lenOfFirstChar(path); //Duzina prvog znaka
