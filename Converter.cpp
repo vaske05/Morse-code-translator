@@ -3,7 +3,6 @@
 #include <sstream>
 #include <iostream>
 #include <fstream>
-
 using namespace std;
 
 Converter::Converter()
@@ -15,7 +14,7 @@ Converter::Converter()
 	this->lenOfWordsPause = 0;
 }
 
-//Function that converts Morse code to English
+//Converting morse code to english
 string Converter::morseToEnglish()
 {
 	string output = "";
@@ -51,6 +50,7 @@ string Converter::morseToEnglish()
 	return output;
 }
 
+//Converting input signal to morse code
 void Converter::signalToMorse(string path)
 {
 
