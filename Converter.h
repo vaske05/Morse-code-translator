@@ -10,7 +10,6 @@ private:
 
 	string morseCodeArray[250], morseCodeString;
 
-
 	//Array of morse code signs(one sign = one letter)
 	string const morse[40] = { ".-", "-...", "-.-.", "-..", ".", "..-.",
 		"--.", "....", "..", ".---", "-.-", ".-..", "--", "-.", "---", ".--.", "--.-",

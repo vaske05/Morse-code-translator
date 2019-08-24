@@ -3,11 +3,11 @@
 #include <string>
 #include <cstdlib>
 #include <fstream>
-#include <windows.h>
 #include <sstream>
 #include <chrono>
 #include <stdlib.h>
 #include "Converter.h"
+#include "Printer.h"
 using namespace std;
 
 //Checking number of samples
@@ -38,67 +38,10 @@ bool checkSamplesNumber(string path)
 	}
 }
 
-
-void print(Converter converter)
-{
-	cout << endl << "Input Morse code: " << converter.getMorseCodeString() << endl;
-	cout << endl << "Input text: " << converter.morseToEnglish() << endl << endl;
-
-	
-	//Simulate audio morse signal :)
-	string answer, *morseCodeArray;
-	int arrayLength = converter.getArrayLength();
-
-	morseCodeArray = converter.getMorseCodeArray();
-
-	cout << "Simulate magic?" << endl;
-
-	while (answer != "Y" || answer != "N")
-	{
-		cout << "Y or N" << endl;
-		cin >> answer;
-
-		if (answer == "Y")
-		{
-			for (int i = 0; i < arrayLength; i++)
-			{
-				if (*(morseCodeArray + i) == ".")
-				{
-					Beep(500, 200);
-				}
-				else if (morseCodeArray[i] == "-")
-				{
-					Beep(500, 700);
-				}
-				else if (morseCodeArray[i] == " ")
-				{
-					Beep(0, 100);
-				}
-				else if (morseCodeArray[i] == " / ")
-				{
-					Beep(0, 400);
-				}
-			}
-			cout << endl;
-			cout << "---------------------------------------------------";
-			cout << endl << "Developed by Milan Vasic." << endl;
-			cout << "---------------------------------------------------" << endl;
-			exit(EXIT_SUCCESS);
-		}
-		else if (answer == "N") {
-			cout << endl;
-			cout << "---------------------------------------------------";
-			cout << endl << "Developed by Milan Vasic." << endl;
-			cout << "---------------------------------------------------" << endl;
-			exit(EXIT_SUCCESS);
-		}
-	}
-	
-}
-
 int main()
 {
 	Converter converter;
+	Printer printer;
 	string path;
 	//cout << "Enter path of file.(Example: C:/Users/Vaske/Desktop/Test/case-7.in ) " << endl;
 	//cin >> path;
@@ -120,5 +63,6 @@ int main()
 		exit(EXIT_FAILURE);
 	}
 
-	print(converter);
+	printer.printResult(converter.getMorseCodeString(), converter.morseToEnglish());
+	printer.printAudioSignal(converter.getMorseCodeArray(), converter.getArrayLength());
 }
